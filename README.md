@@ -42,7 +42,7 @@ entrypoint.sh
 #!/bin/bash
 
 set -e
-run_cmd="dotnet run --no-build --urls http://0.0.0.0:5000 -v d"
+run_cmd="dotnet run --no-build --urls http://0.0.0.0:80 -v d"
 
 export PATH="$PATH:/root/.dotnet/tools"
 
@@ -70,7 +70,7 @@ services:
     container_name: dotnetCore31
     build: .
     ports:
-        - "5005:5000"
+        - "80:5000"
     depends_on:
         - database
   database:
@@ -84,7 +84,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 ```
 
-Once the app starts you can interact at:  http://localhost:5005/swagger to test out the API.
+Once the app starts you can interact at:  http://localhost:80/swagger to test out the API.
 
 You can connect to the database as well by connecting to:  localhost port 5432 with you favourite tool.  I recommend and use DBBeaver: settings are:
 
@@ -111,17 +111,17 @@ Linux/MacOS: /etc/hosts
 127.0.0.1     database
 ````
 
-I prefer to use Visual Studio, to run the application locally simply double click the pgapp.sln file and click run.  Your app will compile and run locally and be alliable on port 5000
+I prefer to use Visual Studio, to run the application locally simply double click the pgapp.sln file and click run.  Your app will compile and run locally and be alliable on port 80
 
-Local url:  http://localhost:5000/swagger 
+Local url:  http://localhost:80/swagger 
 
-Local url with posts:  http://localhost:5005/api/posts
+Local url with posts:  http://localhost:80/api/posts
 
-Local url for post 1:  http://localhost:5005/api/posts/1
+Local url for post 1:  http://localhost:80/api/posts/1
 
-Local url with comments: http://localhost:5005/api/comments
+Local url with comments: http://localhost:80/api/comments
 
-Local url for comment 1: http://localhost:5005/api/comments/1
+Local url for comment 1: http://localhost:80/api/comments/1
 
 
 ![Overview](https://raw.githubusercontent.com/kukielp/dotnetcore31quickstart/master/overview.png "Overview")
